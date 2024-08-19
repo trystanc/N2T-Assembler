@@ -1,9 +1,15 @@
 from Parser import Parser
 from Code import Code
 from SymbolTable import SymbolTable
-
+import sys
 #initialise parts of assembler and I/O files
-file_name = 'Add.asm'
+
+if len(sys.argv) > 1:
+    file_name = sys.argv[1]
+    if not os.path.isfile(file_name):
+        raise FileNotFoundError(f"The file '{file_name}' does not exist.")
+else:
+    raise ValueError("No file name provided as a command-line argument.")
 file = open(file_name, 'r')
 hack = open(file_name[:-3]+'hack', 'w')
 parser = Parser(file_name)
